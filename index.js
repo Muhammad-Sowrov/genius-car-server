@@ -77,6 +77,23 @@ async function run() {
       res.send(result);
     })
 
+    // Update
+    app.patch('/checkout/:id', async(req, res)=> {
+      const id = req.params.id;
+      const filter = {_id: new ObjectId(id)}
+      const update = req.body;
+      console.log(update);
+
+      const updateDoc = {
+        $set: {
+          status: update.status
+        },
+      };
+      const result = await checkOutCollection.updateOne(filter, updateDoc);
+      res.send(result)
+  
+    })
+
 
 
 
